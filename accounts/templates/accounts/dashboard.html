@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="{% static 'css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    {% block container %}
+    <div id="main" class="container-fluid" style="margin-top: 50px">
+
+        <div id="top" class="row">
+            <div class="col-sm-3">
+
+            </div>
+
+            <div class="col-sm-6">
+                <form class="input-group h2" action="." method="get">
+                    <input name="search_box" class="form-control" id="search_box" type="text" placeholder="Pesquisar">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </form>
+            </div>
+
+            <div class="col-sm-3">
+                <a class="btn btn-success pull-right h2" href="" alt="Adicionar novo" title="Adicionar novo">Novo</a>
+            </div>
+        </div> <!-- /#top -->
+
+
+        <hr />
+        <div id="list" class="row">
+            <div class="table-responsive col-md-12">
+                <table class="table table-striped" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Descrição</th>
+                            <th>Classificação</th>
+                            <th>Conta</th>
+                            <th>Valor</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for lancamentoFinanceiro in object_list %}
+                        <tr>
+                            <td>{{ lancamentoFinanceiro.data }}</a></td>
+                            <td>{{ lancamentoFinanceiro.descricao }}</a></td>
+                            <td>{{ lancamentoFinanceiro.classificacao }}</a></td>
+                            <td>{{ lancamentoFinanceiro.conta }}</a></td>
+                            <td>{{ lancamentoFinanceiro.valor }}</a></td>
+                            <td><a class="btn btn-warning btn-xs"
+                                    href="{% url 'financas:lancamentoFinanceiro_update' pk=lancamentoFinanceiro.pk %}">Editar</a>
+                                <a class="btn btn-danger btn-xs"
+                                    href="{% url 'financas:lancamentoFinanceiro_delete' pk=lancamentoFinanceiro.pk %}">Excluir</a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <li>Nenhuma lançamento encontrado</li>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div> <!-- /#list -->
+
+        <!--<div id="bottom" class="row">
+            <div class="col-md-12">
+                <ul class="pagination">
+                    <li class="disabled"><a>&lt; Anterior</a></li>
+                    <li class="disabled"><a>1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
+                </ul><!-- /.pagination -->
+        <!--</div>-->
+        <!--</div> --><!-- /#bottom -->
+    </div> <!-- /#main -->
+    {% endblock %}
+</body>
+
+</html>
